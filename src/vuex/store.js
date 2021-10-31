@@ -1,7 +1,6 @@
-import { createApp } from 'vue'
-import { createStore } from 'vuex'
+import { createApp } from 'vue';
+import { createStore } from 'vuex';
 import axios from 'axios';
-
 
 let store = createStore({ 
     state: { //хранилище
@@ -10,14 +9,14 @@ let store = createStore({
     mutations: {
         SET_PRODUCTS_TO_STATE: (state, products) => {
             state.products = products;
-        }
+            }
     },
     actions: {
         GET_PRODUCTS_FROM_API({commit}) {
             return axios('http://localhost:3000/products', {
             method: "GET"
             })
-            .them((products) => {
+            .then((products) => {
                 commit('SET_PRODUCTS_TO_STATE', products.data);
                 return products;
             })
@@ -32,9 +31,8 @@ let store = createStore({
             return state.products;
         }
     }
-})
+});
 
 const app = createApp({});
 app.use(store);
-
 export default store;
