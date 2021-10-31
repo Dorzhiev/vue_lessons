@@ -15,7 +15,7 @@
     export default {
         name: "v-catalog-item",
         props: {
-          product_data: {
+          product_data: { // product_data связали с "product" в родителе 
             type: Object,
             default() {
               return {}
@@ -34,9 +34,16 @@
     }
 </script>
 
-<style>
-.v-catalog-item__image {
- width: 100px;
+<style lang="scss">
+.v-catalog-item {
+  flex-basis: 25%;
+  box-shadow: 0 0 8px 0 #e0e0e0;
+  padding: $padding*2;
+  margin-bottom: $margin*2;
+
+  &__image {
+    width: 100px;
+  }
 }
 </style>
 
