@@ -6,8 +6,8 @@
             <v-catalog-item 
                 v-for="product in this.$store.state.products"
                 :key="product.article"
-                v-bind:product_data="product"
-                @sendDataToParent="showChildArticleInConsole"
+                :product_data="product"
+                @addToCart="addToCart"
             />
             <!--/ребенок-->
         </div>
@@ -26,69 +26,26 @@
         props: {},
         data() {
             return {
-                // products: [
-                //     {
-                //     image: "1.jpg",
-                //     name: "T-shirt 1",
-                //     price: 100,
-                //     article: "T1",
-                //     available: true,
-                //     category: "Мужские"
-                //     },
-                //     {
-                //     image: "2.jpg",
-                //     name: "T-shirt 2",
-                //     price: 150,
-                //     article: "T2",
-                //     available: true,
-                //     category: "Женские"
-                //     },
-                //     {
-                //     image: "3.jpg",
-                //     name: "T-shirt 3",
-                //     price: 200,
-                //     article: "T3",
-                //     available: false,
-                //     category: "Женские"
-                //     },
-                //     {
-                //     image: "4.jpg",
-                //     name: "T-shirt 4",
-                //     price: 250,
-                //     article: "T4",
-                //     available: true,
-                //     category: "Мужские"
-                //     },
-                //     {
-                //     image: "5.jpg",
-                //     name: "T-shirt 5",
-                //     price: 300,
-                //     article: "T5",
-                //     available: false,
-                //     category: "Женские"
-                //     },
-                //     {
-                //     image: "6.jpeg",
-                //     name: "T-shirt 6",
-                //     price: 350,
-                //     article: "T6",
-                //     availabl: true,
-                //     category: "Женские"
-                //     }
-                // ]
+                
             }
         },
         computed: {},
         methods: {
             ...mapActions([
-                'GET_PRODUCTS_FROM_API'
+              'GET_PRODUCTS_FROM_API',
+              'ADD_TO_CART'
             ]),
-            showChildArticleInConsole(data) {
-                console.log(data);
+            addToCart(data) {
+                this.ADD_TO_CART(data) 
             }
         },
         mounted() {
             this.GET_PRODUCTS_FROM_API()
+            .then((response) => {
+                if (response.data) {
+                    console.log('Data arrived');
+                }
+            })
         },
     }
 </script>

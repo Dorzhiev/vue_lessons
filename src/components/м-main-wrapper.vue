@@ -2,13 +2,17 @@
     <div class="v-main-wrapper">
         <p>{{title}}</p>
         <v-catalog />
-        <v-cart />
+        <v-cart 
+            v-if="CART.length"
+            :cart_data="CART"
+        />
     </div>
 </template>
 
 <script>
     import vCatalog from './v-catalog'
     import vCart from './v-cart'
+    import {mapGetters} from 'vuex' // для того чтобы поймать getters-корзину
 
     export default {
         name: "v-main-wrapper",
@@ -22,7 +26,11 @@
                 title: 'Main wrapper'
             }
         },
-        compudet: {},
+        computed: {
+            ...mapGetters([
+                'CART'
+            ])
+        },
         methods: {},
         wath: {},
         mounted() {
